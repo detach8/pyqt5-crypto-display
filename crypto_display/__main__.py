@@ -24,7 +24,7 @@ last = {}
 lcds = {}
 
 colors = [
-    QColor(255, 255, 255),
+    QColor(0, 0, 0),
     QColor(0, 255, 0),
     QColor(255, 0, 0)
 ]
@@ -90,8 +90,8 @@ def main():
 def data_load():
     global coins, currency, last, lcds, colors
 
+    # Build ids query parameter
     query_ids = ''
-
     for k in coins:
         if not query_ids:
             query_ids = coins[k]
@@ -117,9 +117,8 @@ def data_load():
             elif last[k] > value:
                 movement = -1
 
-
-        palette = lcds[k].palette()
-        palette.setColor(palette.Background, colors[movement])
+        palette = lcds[k].palette()        
+        palette.setColor(palette.Foreground, colors[movement])
         lcds[k].setPalette(palette)
 
         lcds[k].display('{:.2f}'.format(value))
